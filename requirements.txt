@@ -1,0 +1,6 @@
+peewee
+pymysql
+beautifulsoup4
+pandas
+requests
+SQLAlchemy
