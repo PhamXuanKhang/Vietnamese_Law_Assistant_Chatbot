@@ -12,3 +12,8 @@ weaviate-client==4.11.1
 sentence-transformers==3.4.1
 pyvi==0.1.1
 tqdm==4.67.1
+langchain-experimental==0.3.4
+langchain-community==0.3.19
+langchain-huggingface==0.1.2
+# google-generativeai==0.8.4
+langchain-google-genai==2.0.10

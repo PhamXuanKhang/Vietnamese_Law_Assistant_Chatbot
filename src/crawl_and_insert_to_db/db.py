@@ -40,4 +40,4 @@ def create_tables(engine):
         print("Tất cả các bảng đã tồn tại.")
 
 # Tạo bảng trong database
-create_tables(engine=engine)
+# create_tables(engine=engine)
