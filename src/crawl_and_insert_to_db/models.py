@@ -2,6 +2,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, PrimaryKeyConstraint
 from sqlalchemy.orm import relationship
 
+# Tạo kiến trúc database khi lưu vào MySQL
 Base = declarative_base()
 
 class PDChuDe(Base):

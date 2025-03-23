@@ -17,13 +17,10 @@ class LawReflection:
         legal_prompt = PromptTemplate.from_template(
             """Hãy cải tiến câu hỏi pháp lý sau đây dựa trên lịch sử trò chuyện, 
             tạo thành câu hỏi độc lập và rõ ràng bằng tiếng Việt. Chỉ cải tiến nếu cần thiết.
-
             Lịch sử trò chuyện:
             {history_string}
-
             Câu hỏi hiện tại:
             {current_question}
-
             Yêu cầu:
             - Giữ nguyên ngôn ngữ tiếng Việt
             - Tập trung vào yếu tố pháp lý

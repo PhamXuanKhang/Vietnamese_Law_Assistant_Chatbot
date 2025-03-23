@@ -1,15 +1,16 @@
 from typing import List
 import numpy as np
-from route_sample import chatSamples, lawSamples
-from sentence_transformers import SentenceTransformer
+from .route_sample import chatSamples, lawSamples
+from src.embedding.load_embedding_model import model1, model2
 
 class Route():
     def __init__(self, name, samples:List = []):
         self.name = name
         self.samples = samples
 
+# Class Router để phân loại ngữ nghĩa
 class SemanticRouter():
-    def __init__(self, embedding, routes):
+    def __init__(self, embedding, routes, k=5):
         self.routes = routes
         self.embedding = embedding
         self.routesEmbedding = {}
@@ -21,7 +22,8 @@ class SemanticRouter():
         return self.routes
 
     def guide(self, query):
-        queryEmbedding = self.embedding.encode([query]) 
+        queryEmbedding = self.embedding.encode([query])
+
         queryEmbedding = queryEmbedding / np.linalg.norm(queryEmbedding)
         scores = []
 
@@ -32,10 +34,16 @@ class SemanticRouter():
             scores.append((score, route.name))
 
         scores.sort(reverse=True)
-        return scores
+        top_5 = scores[:5]
+
+        route_counts = {}
+        for _, route_name in top_5:
+            route_counts[route_name] = route_counts.get(route_name, 0) + 1
+
+        selected_route = max(route_counts.items(), key=lambda x: x[1])[0]
+        return selected_route
 
 chatRoute = Route("chat", chatSamples)
 lawRoute = Route("law", lawSamples)
 
-embedding_model = SentenceTransformer('dangvantuan/vietnamese-embedding')
-sRoute = SemanticRouter(embedding=embedding_model, routes=[chatRoute, lawRoute])
+sRoute = SemanticRouter(embedding=model2, routes=[chatRoute, lawRoute])

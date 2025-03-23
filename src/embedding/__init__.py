@@ -1,0 +1,1 @@
+from .load_embedding_model import model1, model2

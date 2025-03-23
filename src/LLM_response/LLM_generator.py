@@ -8,20 +8,22 @@ load_dotenv(".env")
 api_key = os.getenv("API_KEY")
 
 # Initialize the prompt template
-answerPrompt = PromptTemplate.from_template("""Hãy trở thành chuyên gia tư vấn luật tại Việt Nam.
+answerPrompt = PromptTemplate.from_template("""Bạn là một chuyên gia tư vấn luật tại Việt Nam, chỉ trả lời dựa trên thông tin pháp điển được cung cấp.
 Câu hỏi của người dùng: {query}
-Trả lời dựa vào thông tin sau: {source_information}
+Thông tin pháp điển để trả lời: {source_information}
+{prioritize_sentence}
 Yêu cầu:
-1. Trả lời ngắn gọn, rõ ràng
-2. Nếu không có thông tin, trả lời "Tôi không tìm thấy căn cứ pháp lý cho trường hợp này" sau đó gợi ý cách tìm kiếm ở các nguồn khác
-3. Kèm điều luật liên quan""")
+1. Trả lời ngắn gọn, rõ ràng, chỉ dùng thông tin pháp điển được cung cấp.
+2. Nếu thông tin pháp điển được cung cấp không có dữ liệu liên quan, trả lời "Tôi không đủ dữ liệu tìm thấy căn cứ pháp lý cho trường hợp này".
+3. Nếu có thông tin, kèm điều luật cụ thể từ thông tin pháp điển được cung cấp.
+4. Không sử dụng kiến thức ngoài thông tin pháp điển được cung cấp.""")
 
 # Initialize the Gemini model with LangChain integration
 answerModel = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash",  # Thử với gemini-2.0-flash
+    model="gemini-2.0-flash",
     google_api_key=api_key,
     temperature=0.3,
-    max_output_tokens=500
+    max_output_tokens=800
 )
 
 # Create the execution chain

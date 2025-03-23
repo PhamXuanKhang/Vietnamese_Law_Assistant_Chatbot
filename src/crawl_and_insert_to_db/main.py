@@ -1,4 +1,4 @@
-from db import get_db
+from db import get_db, create_tables, engine
 from models import PDChuDe, PDDeMuc, PDChuong, PDDieu, PDTable, PDFile, PDMucLienQuan
 from bs4 import BeautifulSoup
 from utils import convert_roman_to_num, extract_input
@@ -7,6 +7,10 @@ import json
 import os
 import re
 
+# Tạo các bảng nếu chưa tồn tại trong database
+create_tables(engine=engine)
+
+# Load checkpoint và dữ liệu
 def load_json_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -25,9 +29,10 @@ def load_checkpoint():
 def save_checkpoint(file_name):
     with open("checkpoint.txt", "w") as f:
         f.write(file_name)
-    
+
 checkpoint = load_checkpoint()
 
+# Insert thông tin vào database
 print("Load Chủ Đề Từ File ...")
 chudes = load_json_file("./BoPhapDienDienTu/ChuDe.json")
 with next(get_db()) as db:

@@ -1,4 +1,4 @@
-from models import Base
+from .models import Base
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy import inspect
@@ -12,6 +12,7 @@ host = os.getenv('DB_HOST')
 port = os.getenv('DB_PORT')
 db_name = os.getenv('DB_NAME')
 
+# Tạo connection string để kết nối với MySQL
 connection_string = f"mysql+pymysql://{user}:{password}@{host}:{port}/{db_name}?charset=utf8mb4"
 engine = create_engine(connection_string, echo=False)
 
@@ -38,6 +39,3 @@ def create_tables(engine):
         Base.metadata.create_all(engine)
     else:
         print("Tất cả các bảng đã tồn tại.")
-
-# Tạo bảng trong database
-# create_tables(engine=engine)

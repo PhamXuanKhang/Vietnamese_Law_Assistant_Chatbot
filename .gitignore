@@ -3,3 +3,4 @@ myenv/
 BoPhapDienDienTu/
 weaviate-docker/weaviate_data/
 __pycache__/
+models/
