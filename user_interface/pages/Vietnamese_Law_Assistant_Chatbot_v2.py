@@ -5,7 +5,7 @@ import uuid
 st.set_page_config(layout="wide", page_title="Chatbot Version 2.0")
 
 # Thiết lập giao diện Streamlit
-st.title("Chatbot Version 2.0 - Trợ lý Luật Việt Nam")
+st.title("Chatbot Version 2.0 - Law Assistant Using Knowledge Graph")
 
 st.session_state.fastapi_url2 = "http://localhost:8000/v2/chat"  # URL FastAPI
 

@@ -156,12 +156,12 @@ def retrieve_entity(query_text, ner_entities=None):
                          neo4j_password=os.getenv('NEO4J_PASSWORD'))
     results = retriever.advanced_retrieve(query_text, ner_entities)
     
-    print(f"\nKết quả xếp hạng cuối cùng (Top {retriever.top_k}):")
-    for idx, entity in enumerate(results, 1):
-        print(f"{idx}. Node: {entity['name']} -- BM25 Score: {entity['bm25']:.4f}, "
-              f"Cosine Score: {entity['cosine']:.4f}, Graph Sum: {entity['graph_sum']:.4f}, "
-              f"Final Score: {entity['final_score']:.4f}")
-    print('Nội dung truy vấn cuối cùng:')
-    for idx, entity in enumerate(results, 1):
-        print(f"{idx}. {entity['name']} - {entity['value']} (Label: {entity['label']}) - (Score: {entity['final_score']:.4f})")
+    retriever.driver.close()
+    # for idx, entity in enumerate(results, 1):
+    #     print(f"{idx}. Node: {entity['name']} -- BM25 Score: {entity['bm25']:.4f}, "
+    #           f"Cosine Score: {entity['cosine']:.4f}, Graph Sum: {entity['graph_sum']:.4f}, "
+    #           f"Final Score: {entity['final_score']:.4f}")
+    # print('Nội dung truy vấn cuối cùng:')
+    # for idx, entity in enumerate(results, 1):
+    #     print(f"{idx}. {entity['name']} - {entity['value']} (Label: {entity['label']}) - (Score: {entity['final_score']:.4f})")
     return results
