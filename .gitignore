@@ -1,6 +1,6 @@
 .env
 myenv/
-BoPhapDienDienTu/
-weaviate-docker/weaviate_data/
+chatbot_v1/BoPhapDienDienTu/
+chatbot_v1/weaviate-docker/weaviate_data/
 __pycache__/
 models/
