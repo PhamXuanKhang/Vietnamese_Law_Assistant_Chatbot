@@ -44,18 +44,18 @@ class Retriever:
                 "score": score
             }
             
-            if score >= 0.5:
+            if score >= 0.6:
                 context_1.append(result)
             elif score >= 0.1:
                 context_2.append(result)
         
         if len(context_1) > 0:
             context_1 = sorted(context_1, key=lambda x: x["score"], reverse=True)
-            context_1 = context_1[:5]
+            context_1 = context_1[:3]
             return context_1, True
         elif len(context_2) > 0:
             context_2 = sorted(context_2, key=lambda x: x["score"], reverse=True)
-            context_2 = context_2[:5]
+            context_2 = context_2[:3]
             return context_2, False
         else:
             return "Không có thông tin liên quan nào được đề cập.", False
@@ -64,12 +64,12 @@ class Retriever:
         if self.client and self.client.is_connected():
             self.client.close()
 
-retriever = Retriever(model2, "non_chunk_data2")
-query = "Điều 35 Nghị định số 105/2021/NĐ-CP có nội dung gì?"
-result = retriever(query)
-if result[1]:
-    print("Prioritize!")
-else:
-    print("No Prioritize!")
-print(result[0])
-retriever.close()
+# retriever = Retriever(model2, "non_chunk_data2")
+# query = "Điều 35 Nghị định số 105/2021/NĐ-CP có nội dung gì?"
+# result = retriever(query)
+# if result[1]:
+#     print("Prioritize!")
+# else:
+#     print("No Prioritize!")
+# print(result[0])
+# retriever.close()
