@@ -4,6 +4,11 @@ import uuid
 
 st.set_page_config(layout="wide", page_title="Chatbot Version 2.0")
 
+with st.sidebar:
+    st.title("Chatbot Hỗ trợ luật Việt Nam")
+    st.info("Phát triển bởi: CuliData")
+    st.image("logo.png", width=150)
+    
 # Thiết lập giao diện Streamlit
 st.title("Chatbot Version 2.0 - Law Assistant Using Knowledge Graph")
 

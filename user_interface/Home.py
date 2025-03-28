@@ -1,5 +1,12 @@
 import streamlit as st
 
+st.set_page_config(page_title="Chatbot Home", layout="wide")
+
+with st.sidebar:
+    st.title("Chatbot Hỗ trợ luật Việt Nam")
+    st.info("Phát triển bởi: CuliData")
+    st.image("logo.png", width=150)
+
 st.title("Vietnamese Law Assistant Chatbot")
 
 st.write("### About Us")
