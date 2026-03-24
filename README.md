@@ -432,7 +432,88 @@ Stream Response
 
 **Team CuliData** - Nhóm sinh viên đam mê ứng dụng công nghệ vào lĩnh vực luật pháp
 
-## 📝 License
+## � Troubleshooting & Vấn đề thường gặp
+
+### Vấn đề 1: Kết nối MySQL thất bại
+**Lỗi**: `pymysql.err.OperationalError: (2003, "Can't connect to MySQL server")`
+
+**Giải pháp**:
+- Kiểm tra MySQL đang chạy: `mysql -u your_username -p`
+- Kiểm tra cấu hình `.env` (DB_HOST, DB_PORT, DB_USER, DB_PASSWORD)
+- Tạo database: `CREATE DATABASE phap_dien_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
+
+### Vấn đề 2: Weaviate không kết nối
+**Lỗi**: `requests.exceptions.ConnectionError` khi truy cập Weaviate
+
+**Giải pháp**:
+```bash
+# Kiểm tra Weaviate đang chạy
+docker ps | grep weaviate
+
+# Restart Weaviate
+cd chatbot_v1/weaviate-docker
+docker-compose restart
+
+# Kiểm tra logs
+docker-compose logs weaviate
+```
+
+### Vấn đề 3: Google API Key không hợp lệ
+**Lỗi**: `google.auth.exceptions.DefaultCredentialsError`
+
+**Giải pháp**:
+- Kiểm tra API_KEY trong `.env` file
+- Đảm bảo API key có quyền truy cập Google Generative AI
+- Lấy key mới từ [Google AI Studio](https://aistudio.google.com/apikey)
+
+### Vấn đề 4: NER Model không load
+**Lỗi**: `FileNotFoundError: bilstm_ner.pt not found`
+
+**Giải pháp**:
+- Đảm bảo file `chatbot_v2/Code/NER/bilstm_ner.pt` tồn tại
+- Nếu không có, train NER model từ `ner_data_8000.json`
+
+## ⚠️ Những hạn chế đã biết
+
+1. **Phạm vi dữ liệu**: Chỉ bao gồm Trật tự, An toàn xã hội; không có các lĩnh vực pháp luật khác
+2. **Tính chính xác**: Thông tin tham khảo từ pháp điển, không thay thế tư vấn pháp lý chuyên nghiệp
+3. **Ngôn ngữ**: Tối ưu cho tiếng Việt chuẩn; có thể kém hiệu quả với lối nói thông tục
+4. **Câu hỏi phức tạp**: Khảng xử lý tốt các câu hỏi yêu cầu phân tích chéo nhiều điều luật
+5. **Cập nhật pháp luật**: Dữ liệu có thể lỗi thời; cần cập nhật định kỳ từ Bộ Pháp điển
+6. **Hiệu suất**: Phụ thuộc vào chất lượng vector database và latency mạng
+
+## 🚀 Cải tiến trong tương lai
+
+- [ ] Mở rộng sang các lĩnh vực pháp luật khác (Giao thông, Lao động, Hôn nhân gia đình, ...)
+- [ ] Tích hợp với các cơ sở dữ liệu pháp luật khác (VBPL Online, Đại biểu Quốc hội)
+- [ ] Cải thiện NER model với dataset annotation lớn hơn
+- [ ] Thêm tính năng tìm kiếm các case law liên quan
+- [ ] Tạo report/document tóm tắt pháp luật
+- [ ] Hỗ trợ multiple languages (English, Chinese, ...)
+- [ ] Mobile app (iOS/Android)
+- [ ] Dashboard thống kê câu hỏi thường gặp
+- [ ] Fine-tune LLM với legal domain data
+- [ ] Integration với các nền tảng (WhatsApp, Telegram, ...)
+
+## 🤝 Hướng dẫn đóng góp
+
+Chúng tôi chào đón mọi đóng góp! Vui lòng tuân theo:
+
+1. **Fork repository** và tạo feature branch
+2. **Thực hiện thay đổi** với commit message rõ ràng
+3. **Test kỹ lưỡng** trên máy local
+4. **Submit pull request** với mô tả chi tiết
+5. **Tuân theo PEP 8** code style
+
+**Các lĩnh vực cần đóng góp**:
+- Bug fixes và cải thiện hiệu suất
+- Mở rộng dataset pháp luật
+- Cải thiện NER model
+- Tối ưu hóa retrieval strategy
+- Tài liệu hóa và ví dụ mã
+- UI/UX improvements
+
+## �📝 License
 
 Dự án này được phát triển cho mục đích học tập và nghiên cứu.
 
